@@ -1,0 +1,95 @@
+{
+  "run_id": "20260609T133039Z",
+  "timestamp": "2026-06-09T13:30:39.457801+00:00",
+  "phase": "BUILD",
+  "sprint": "Sprint 1",
+  "collection": "eugene-meddata-nexus",
+  "chroma_persist_path": "/home/jimmie/linkops-industries/GP-copilot/GP-SECLAB/target-application/slot-5/Eugene-AI/evidence/chroma",
+  "retrieval": {
+    "checks": [
+      {
+        "id": "LR-001",
+        "role": "it_security",
+        "query": "Who is the CISO at MedData Nexus?",
+        "retrieved_count": 5,
+        "categories": [
+          "security",
+          "ai-governance",
+          "compliance",
+          "policies",
+          "compliance"
+        ],
+        "chunk_ids": [
+          "meddata::security::incident-response-plan-v3::chunk-003",
+          "meddata::ai-governance::ai-system-inventory::chunk-002",
+          "meddata::compliance::soc2-type2-summary-2025::chunk-015",
+          "meddata::policies::data-classification-policy::chunk-002",
+          "meddata::compliance::hipaa-security-rule-assessment-2025::chunk-029"
+        ],
+        "forbidden_seen": [],
+        "pass": true
+      },
+      {
+        "id": "LR-002",
+        "role": "vendor_risk_reviewer",
+        "query": "What security incidents and HIPAA response steps are documented?",
+        "retrieved_count": 0,
+        "categories": [],
+        "chunk_ids": [],
+        "forbidden_seen": [],
+        "pass": true
+      },
+      {
+        "id": "LR-003",
+        "role": "compliance_analyst",
+        "query": "What is the data classification tier for PHI?",
+        "retrieved_count": 1,
+        "categories": [
+          "ai-governance"
+        ],
+        "chunk_ids": [
+          "meddata::ai-governance::ai-governance-policy-v1::chunk-010"
+        ],
+        "forbidden_seen": [],
+        "pass": true
+      }
+    ],
+    "pass": true
+  },
+  "api_query": {
+    "response_preview": "Eugene advisory draft based on authorized retrieved context.\n\nQuery: Who is the CISO at MedData Nexus?\n\nSource citations: incident-response-plan-v3:3, ai-system-inventory:2, soc2-type2-summary-2025:15\n\nRelevant context preview: ### 2.1 Core IR Team  | Role | Name | Contact | Responsibilities | |----",
+    "source_count": 5,
+    "sources": [
+      {
+        "doc_name": "incident-response-plan-v3",
+        "classification": "Confidential",
+        "chunk_id": "meddata::security::incident-response-plan-v3::chunk-003"
+      },
+      {
+        "doc_name": "ai-system-inventory",
+        "classification": "Confidential",
+        "chunk_id": "meddata::ai-governance::ai-system-inventory::chunk-002"
+      },
+      {
+        "doc_name": "soc2-type2-summary-2025",
+        "classification": "Confidential",
+        "chunk_id": "meddata::compliance::soc2-type2-summary-2025::chunk-015"
+      },
+      {
+        "doc_name": "data-classification-policy",
+        "classification": "Internal",
+        "chunk_id": "meddata::policies::data-classification-policy::chunk-002"
+      },
+      {
+        "doc_name": "hipaa-security-rule-assessment-2025",
+        "classification": "Confidential",
+        "chunk_id": "meddata::compliance::hipaa-security-rule-assessment-2025::chunk-029"
+      }
+    ],
+    "audit_id": "AUD-20260609T133039Z-B2CE63",
+    "high_risk": true,
+    "review_required": true,
+    "pass": true
+  },
+  "overall_status": "PASS"
+}

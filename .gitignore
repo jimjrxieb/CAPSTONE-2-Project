@@ -1,0 +1,41 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Virtual environments
+.venv/
+venv/
+
+# Local configuration and secrets
+.env
+.env.*
+!.env.example
+!Eugene-AI/.env.example
+
+# Personal preparation notes
+CAPSTONE-2-AI-SECURITY-ASSESSMENT-LAB/interview-defense/
+
+# Generated databases and local runtime state
+Eugene-AI/evidence/chroma/
+Eugene-AI/evidence/audit-log.jsonl
+Eugene-AI/evidence/review-log.jsonl
+Eugene-AI/evidence/corpus-alert-log.jsonl
+*.sqlite
+*.sqlite3
+
+# Build outputs
+dist/
+build/
+
+# OS/editor noise
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

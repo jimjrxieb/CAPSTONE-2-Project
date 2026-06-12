@@ -1,0 +1,62 @@
+{
+  "run_id": "20260610T150713Z",
+  "timestamp": "2026-06-10T15:07:13.038379+00:00",
+  "phase": "BUILD/BREAK",
+  "test": "Platform control evidence for T-12/T-13/T-14/T-16",
+  "analyst": "codex",
+  "overall_status": "PASS",
+  "checks": [
+    {
+      "control": "T-12 model pins recorded",
+      "status": "PASS",
+      "detail": "Local generation and embedding models are pinned; Eugene has no external LLM API path in runtime config.",
+      "evidence": "deploy/k8s/configmap.yaml; BUILD/model-decision-record.md"
+    },
+    {
+      "control": "T-12 Chroma package/image version aligned",
+      "status": "PASS",
+      "detail": "requirements chromadb=0.5.3; image chromadb/chroma=0.5.3",
+      "evidence": "requirements.txt; deploy/k8s/deployment-chromadb.yaml"
+    },
+    {
+      "control": "T-13 SCA workflow present",
+      "status": "PASS",
+      "detail": "GitHub Actions workflow runs pip-audit and rejects non-exact pins on pull requests.",
+      "evidence": ".github/workflows/sca.yml"
+    },
+    {
+      "control": "T-13 requirements exactly pinned",
+      "status": "PASS",
+      "detail": "All runtime dependencies use exact == pins.",
+      "evidence": "requirements.txt"
+    },
+    {
+      "control": "T-14 Chroma server auth configured",
+      "status": "PASS",
+      "detail": "Chroma deployment requires token authentication sourced from the Kubernetes secret template.",
+      "evidence": "deploy/k8s/deployment-chromadb.yaml; deploy/k8s/secret-template.yaml"
+    },
+    {
+      "control": "T-14 API uses authenticated Chroma HTTP client in server mode",
+      "status": "PASS",
+      "detail": "Retriever switches to HttpClient when CHROMA_HOST is not localhost and supplies token auth when configured.",
+      "evidence": "src/rag/retriever.py"
+    },
+    {
+      "control": "T-14 NetworkPolicy restricts Chroma ingress",
+      "status": "PASS",
+      "detail": "Default-deny policy is paired with Chroma ingress allow-list from eugene-api pods only.",
+      "evidence": "deploy/k8s/networkpolicy.yaml"
+    },
+    {
+      "control": "T-16 query rate limiting wired",
+      "status": "PASS",
+      "detail": "POST /query enforces a per-token in-process request limit, with Kubernetes config exposing the limit.",
+      "evidence": "src/api/routes/query.py; src/api/rate_limit.py; deploy/k8s/configmap.yaml"
+    }
+  ],
+  "residual_risk": [
+    "This is static evidence. A deployed-cluster BREAK run must still curl Chroma directly and prove unauthenticated access is rejected.",
+    "External LLM APIs are out of scope for Eugene. Adding one later requires a new COMPLY boundary and renewed BREAK evidence."
+  ]
+}

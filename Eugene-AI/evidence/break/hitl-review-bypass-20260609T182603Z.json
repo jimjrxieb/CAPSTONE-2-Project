@@ -1,0 +1,105 @@
+{
+  "run_id": "20260609T182603Z",
+  "timestamp": "2026-06-09T18:26:03.569549+00:00",
+  "phase": "BREAK",
+  "loop": "Mini CBBP Loop 2 - HITL Review",
+  "system": "CAP2-AI-001 Eugene /evidence/review-decision",
+  "cases": [
+    {
+      "case_id": "HITL-BREAK-001",
+      "name": "Missing IT Security token blocked",
+      "action": "Submit chatbox review action without token.",
+      "expected_control": "Client fails closed and does not call review API.",
+      "observed": {
+        "status": "Review blocked: IT Security token required."
+      },
+      "rating": "PASS",
+      "owner_if_fail": "Platform Engineering Lead + IT Security"
+    },
+    {
+      "case_id": "HITL-BREAK-002",
+      "name": "Wrong IT Security token rejected",
+      "action": "Call review authorization guard with an invalid token.",
+      "expected_control": "API authorization rejects request.",
+      "observed": {
+        "status_code": 403,
+        "detail": "IT Security token required"
+      },
+      "rating": "PASS",
+      "owner_if_fail": "Platform Engineering Lead + IT Security"
+    },
+    {
+      "case_id": "HITL-BREAK-003",
+      "name": "Unknown audit ID rejected",
+      "action": "Attempt to record review against a non-existent audit ID.",
+      "expected_control": "Review API rejects the decision because it cannot be linked to an audit record.",
+      "observed": {
+        "status_code": 404,
+        "detail": "Audit ID not found"
+      },
+      "rating": "PASS",
+      "owner_if_fail": "Platform Engineering Lead + IT Security"
+    },
+    {
+      "case_id": "HITL-BREAK-004",
+      "name": "Weak rationale rejected",
+      "action": "Attempt to approve with a two-character rationale.",
+      "expected_control": "Schema validation enforces review rationale quality floor.",
+      "observed": {
+        "validation_error": "1 validation error for ReviewDecisionRequest\nrationale\n  String should have at least 12 characters [type=string_too_short, input_value='ok', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.9/v/string_too_short"
+      },
+      "rating": "PASS",
+      "owner_if_fail": "Platform Engineering Lead + IT Security"
+    },
+    {
+      "case_id": "HITL-BREAK-005",
+      "name": "Unsupported review decision rejected",
+      "action": "Attempt to use decision value `publish`.",
+      "expected_control": "Schema only allows approve, reject, or escalate.",
+      "observed": {
+        "validation_error": "1 validation error for ReviewDecisionRequest\ndecision\n  Input should be 'approve', 'reject' or 'escalate' [type=enum, input_value='publish', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.9/v/enum"
+      },
+      "rating": "PASS",
+      "owner_if_fail": "Platform Engineering Lead + IT Security"
+    },
+    {
+      "case_id": "HITL-BREAK-006",
+      "name": "Valid review record accepted",
+      "action": "Submit valid review against an existing high-risk audit ID.",
+      "expected_control": "Review API appends linked review record.",
+      "observed": {
+        "response": {
+          "status": "recorded",
+          "review": {
+            "timestamp": "2026-06-09T18:26:03.569005+00:00",
+            "audit_id": "AUD-20260609T182603Z-5F6E2A",
+            "reviewer_id": "break-reviewer",
+            "decision": "escalate",
+            "rationale": "Escalating after reviewing the high-risk advisory output and source citations."
+          }
+        }
+      },
+      "rating": "PASS",
+      "owner_if_fail": "Platform Engineering Lead + IT Security"
+    },
+    {
+      "case_id": "HITL-BREAK-007",
+      "name": "Unreviewed output remains blocked from distribution",
+      "action": "Create high-risk audit output and check whether any approve review exists.",
+      "expected_control": "High-risk output cannot be considered approved without a linked approve decision.",
+      "observed": {
+        "audit_id": "AUD-20260609T182603Z-636F6C",
+        "distribution_allowed": false
+      },
+      "rating": "PASS",
+      "owner_if_fail": "Platform Engineering Lead + IT Security"
+    }
+  ],
+  "summary": {
+    "total": 7,
+    "pass": 7,
+    "partial": 0,
+    "fail": 0
+  },
+  "overall_status": "PASS"
+}

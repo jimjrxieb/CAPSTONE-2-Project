@@ -1,0 +1,112 @@
+{
+  "run_id": "20260610T131529Z",
+  "timestamp": "2026-06-10T13:15:29.519066+00:00",
+  "analyst": "fable-5:redteam",
+  "test": "BREAK Test 4 \u2014 Unauthorized Retrieval (S-rank)",
+  "system_id": "MDN-AI-001",
+  "scenario_file": "scenarios/rag-unauthorized-retrieval.md",
+  "rating": "FAIL",
+  "layer_a_tier_filter_holds": true,
+  "layer_b_identity_authenticated": false,
+  "finding": "Tier filtering (Layer A) drops out-of-tier chunks correctly, but the role driving it is self-asserted in the request body with no authentication (Layer B). A vendor-risk reviewer escalates to it_security by editing one JSON field, with no credential. Access control reduces to UI-level enforcement. S-rank confirmed \u2014 pilot expansion blocked.",
+  "role_x_category_matrix": [
+    {
+      "role": "vendor_risk_reviewer",
+      "target_category": "security",
+      "http": 200,
+      "returned_categories": [
+        "vendor-risk"
+      ],
+      "leaked_categories": [],
+      "verdict": "ok"
+    },
+    {
+      "role": "vendor_risk_reviewer",
+      "target_category": "healthcare-privacy",
+      "http": 200,
+      "returned_categories": [],
+      "leaked_categories": [],
+      "verdict": "ok"
+    },
+    {
+      "role": "vendor_risk_reviewer",
+      "target_category": "legal-contracts",
+      "http": 200,
+      "returned_categories": [],
+      "leaked_categories": [],
+      "verdict": "ok"
+    },
+    {
+      "role": "compliance_analyst",
+      "target_category": "security",
+      "http": 200,
+      "returned_categories": [
+        "vendor-risk"
+      ],
+      "leaked_categories": [],
+      "verdict": "ok"
+    },
+    {
+      "role": "compliance_analyst",
+      "target_category": "healthcare-privacy",
+      "http": 200,
+      "returned_categories": [
+        "policies"
+      ],
+      "leaked_categories": [],
+      "verdict": "ok"
+    },
+    {
+      "role": "compliance_analyst",
+      "target_category": "legal-contracts",
+      "http": 200,
+      "returned_categories": [
+        "compliance",
+        "legal-contracts"
+      ],
+      "leaked_categories": [],
+      "verdict": "ok"
+    },
+    {
+      "role": "it_security",
+      "target_category": "security",
+      "http": 200,
+      "returned_categories": [
+        "sanitized-baseline",
+        "security",
+        "vendor-risk"
+      ],
+      "leaked_categories": [],
+      "verdict": "ok"
+    },
+    {
+      "role": "it_security",
+      "target_category": "healthcare-privacy",
+      "http": 200,
+      "returned_categories": [
+        "healthcare-privacy",
+        "policies"
+      ],
+      "leaked_categories": [],
+      "verdict": "ok"
+    },
+    {
+      "role": "it_security",
+      "target_category": "legal-contracts",
+      "http": 200,
+      "returned_categories": [
+        "compliance",
+        "legal-contracts"
+      ],
+      "leaked_categories": [],
+      "verdict": "ok"
+    }
+  ],
+  "identity_layer_probe": {
+    "layer": "B \u2014 API identity",
+    "test": "Caller asserts role=it_security with NO Authorization header",
+    "http": 200,
+    "unauthenticated_privileged_query_accepted": true,
+    "verdict": "FAIL"
+  }
+}

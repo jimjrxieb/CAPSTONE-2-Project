@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: eugene-ai-config
+  namespace: eugene-ai
+data:
+  OLLAMA_ENDPOINT: "http://ollama.eugene-ai.svc.cluster.local:11434"
+  OLLAMA_MODEL: "llama3.2:3b"
+  OLLAMA_EMBED_MODEL: "nomic-embed-text:v1"
+  EUGENE_MODE: "deterministic"
+  CHROMA_HOST: "chromadb.eugene-ai.svc.cluster.local"
+  CHROMA_PORT: "8001"
+  CHROMA_COLLECTION: "eugene-meddata-nexus"
+  CHROMA_PERSIST_PATH: "/app/evidence/chroma"
+  CHROMA_AUTH_TOKEN_TRANSPORT_HEADER: "Authorization"
+  DISABLE_DOCS: "true"
+  CORS_ORIGINS: "http://localhost:7860"
+  AUDIT_LOG_PATH: "/app/evidence/audit-log.jsonl"
+  QUERY_TOP_K: "5"
+  QUERY_RATE_LIMIT_PER_MINUTE: "60"

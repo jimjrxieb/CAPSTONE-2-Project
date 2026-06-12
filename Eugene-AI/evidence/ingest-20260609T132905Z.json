@@ -1,0 +1,13 @@
+{
+  "timestamp": "2026-06-09T13:28:58.106281+00:00",
+  "collection": "eugene-meddata-nexus",
+  "reset": true,
+  "include_poisoned": false,
+  "include_unsafe": false,
+  "documents_seen": 17,
+  "chunks_ready": 263,
+  "rejected": [],
+  "dry_run": false,
+  "inserted": 263,
+  "collection_count": 263
+}

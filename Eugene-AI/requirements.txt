@@ -1,0 +1,26 @@
+# Eugene-AI dependencies — all pinned
+# Run pip-audit before adding or upgrading any package
+
+# RAG and vector store
+chromadb==0.5.3
+ollama==0.2.1
+
+# Embeddings (local)
+# nomic-embed-text served via Ollama — no additional package needed
+
+# API
+fastapi==0.111.0
+uvicorn==0.30.1
+python-multipart==0.0.9
+
+# Chatbox
+gradio==4.36.1
+
+# Guardrails / scanning
+detect-secrets==1.5.0
+
+# Utilities
+pydantic==2.7.4
+python-dotenv==1.0.1
+httpx==0.27.0
+structlog==24.2.0

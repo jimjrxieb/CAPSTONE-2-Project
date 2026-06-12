@@ -1,0 +1,10 @@
+# MITRE ATLAS Mapping
+
+| Scenario | ATLAS Tactic/Technique | Why It Applies | Evidence | Remediation |
+|---|---|---|---|---|
+| Direct prompt injection | AML.T0051.000 Prompt Injection | User-supplied prompt attempts to alter model behavior | `Eugene-AI/evidence/break/chatbox-break-20260609T142715Z.json`; `Eugene-AI/evidence/eugene-helpfulness-eval-ollama-20260612T044252Z.json`; `Eugene-AI/evidence/crewai/dry-run-rag-direct-prompt-injection.json` | Input sanitization and prompt isolation |
+| Indirect prompt injection in retrieved document | AML.T0051.001 Indirect Prompt Injection | Retrieved corpus content attempts to instruct the model | Corpus contamination BREAK evidence | Document injection scan before embedding |
+| Unauthorized retrieval / source exfiltration | AML.T0024.000 Exfiltration via ML Inference API | A model/API response may reveal sensitive corpus content | `Eugene-AI/evidence/baseline-rag-eval-20260609T190645Z.json`; `Eugene-AI/evidence/break/unauthorized-retrieval-break-20260610T131529Z.json`; `Eugene-AI/evidence/break/platform-deployed-break-20260612T043154Z.json` | Role-filtered retrieval and output controls |
+| Corpus poisoning | AML.T0020 Poison Training Data / data poisoning analog | Untrusted data could steer model outputs through retrieval context | Corpus contamination BREAK evidence | Manifest approval, hash record, owner alert |
+| Unsafe AI-suggested dependency | AML.T0010 ML Supply Chain Compromise | A dependency introduced through AI-assisted development can compromise the pipeline | Static SCA/pin evidence in `Eugene-AI/evidence/platform-control-check-*.json`; live PR/CI bypass simulation pending | Dependency review, exact pins, SCA gate |
+| Runtime drift | AML.T0042 Verify Attack | Retest evidence becomes stale when model/runtime versions change | Model decision record plus `Eugene-AI/evidence/platform-control-check-20260611T194349Z.json`; `Eugene-AI/evidence/eugene-helpfulness-eval-ollama-20260612T044252Z.json` | Pin model IDs and rerun BREAK tests on change |

@@ -1,0 +1,80 @@
+{
+  "run_id": "20260609T193758Z",
+  "timestamp": "2026-06-09T19:37:58.331019+00:00",
+  "phase": "BUILD",
+  "loop": "Mini CBBP Loop 3 - Corpus Alert Delivery",
+  "alert": {
+    "alert_id": "CORPUS-20260609T193758Z-65291B",
+    "timestamp": "2026-06-09T19:37:58.330868+00:00",
+    "alert_type": "MANIFEST_CONTRACT_VIOLATION",
+    "severity": "HIGH",
+    "owner": "RAG Corpus Owner",
+    "owner_contact": {
+      "name": "RAG Corpus Owner",
+      "team": "AI Platform Governance",
+      "email": "rag-corpus-owner@meddata-nexus.fake",
+      "slack_channel": "#rag-corpus-alerts",
+      "backup_owner": "IT Security",
+      "escalation_sla": "1 business day for High severity; immediate review for Restricted/PHI or poisoned content",
+      "registry_status": "resolved"
+    },
+    "findings": [
+      {
+        "source_path": "source-documents/security/rogue.md",
+        "reason": "UNAPPROVED_FILE_ON_DISK"
+      }
+    ],
+    "action_required": "Quarantine unapproved or unsigned corpus documents before ingest continues.",
+    "framework_tags": {
+      "owasp_llm": [
+        "LLM03 Supply Chain",
+        "LLM06 Sensitive Information Disclosure"
+      ],
+      "nist_ai_rmf": [
+        "MAP 3.2",
+        "MEASURE 2.7",
+        "MANAGE 2.3",
+        "GOVERN 1.5"
+      ],
+      "mitre_atlas": [
+        "AML.T0024.000 Exfiltration via Retrieval",
+        "AML.T0051 Prompt Injection"
+      ]
+    },
+    "delivery": {
+      "local_log": "written",
+      "slack": "disabled"
+    }
+  },
+  "slack_payload_preview": {
+    "channel": "#rag-corpus-alerts",
+    "username": "Eugene Corpus Guard",
+    "text": "HIGH corpus alert: MANIFEST_CONTRACT_VIOLATION (CORPUS-20260609T193758Z-65291B)",
+    "blocks": [
+      {
+        "type": "section",
+        "text": {
+          "type": "mrkdwn",
+          "text": "*HIGH Eugene corpus alert*\n*Type:* MANIFEST_CONTRACT_VIOLATION\n*Owner:* RAG Corpus Owner (#rag-corpus-alerts)\n*Sources:* source-documents/security/rogue.md\n*Action:* Quarantine unapproved or unsigned corpus documents before ingest continues."
+        }
+      },
+      {
+        "type": "context",
+        "elements": [
+          {
+            "type": "mrkdwn",
+            "text": "*OWASP:* LLM03 Supply Chain, LLM06 Sensitive Information Disclosure | *AI RMF:* MAP 3.2, MEASURE 2.7, MANAGE 2.3, GOVERN 1.5 | *ATLAS:* AML.T0024.000 Exfiltration via Retrieval, AML.T0051 Prompt Injection"
+          }
+        ]
+      }
+    ]
+  },
+  "checks": {
+    "owner_resolved": true,
+    "local_alert_log_written": true,
+    "slack_payload_has_channel": true,
+    "slack_payload_has_framework_tags": true,
+    "slack_network_disabled_by_default": true
+  },
+  "overall_status": "PASS"
+}

@@ -1,0 +1,18 @@
+{
+  "RAG Corpus Owner": {
+    "name": "RAG Corpus Owner",
+    "team": "AI Platform Governance",
+    "email": "rag-corpus-owner@meddata-nexus.fake",
+    "slack_channel": "#rag-corpus-alerts",
+    "backup_owner": "IT Security",
+    "escalation_sla": "1 business day for High severity; immediate review for Restricted/PHI or poisoned content"
+  },
+  "IT Security": {
+    "name": "IT Security",
+    "team": "Security Engineering",
+    "email": "it-security@meddata-nexus.fake",
+    "slack_channel": "#it-security-alerts",
+    "backup_owner": "CISO",
+    "escalation_sla": "Immediate review for Restricted, credential, or incident-response content"
+  }
+}

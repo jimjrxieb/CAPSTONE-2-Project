@@ -1,0 +1,88 @@
+{
+  "run_id": "20260612T043154Z",
+  "timestamp": "2026-06-12T04:31:54.415347+00:00",
+  "phase": "BUILD/BREAK",
+  "test": "Sprint 2 T3 deployed platform BREAK: Chroma direct-access and rapid-query controls",
+  "analyst": "codex",
+  "cluster": {
+    "type": "kind",
+    "name": "cap2-sprint2",
+    "context": "kind-cap2-sprint2",
+    "cni": "Calico v3.27.3",
+    "scope": "local throwaway lab cluster"
+  },
+  "manifests_applied": [
+    "deploy/k8s/namespace.yaml",
+    "deploy/k8s/configmap.yaml",
+    "deploy/k8s/secret-template.yaml with throwaway dev-sprint2-token",
+    "deploy/k8s/serviceaccount.yaml",
+    "deploy/k8s/role.yaml",
+    "deploy/k8s/rolebinding.yaml",
+    "deploy/k8s/deployment-chromadb.yaml",
+    "deploy/k8s/deployment-api.yaml",
+    "deploy/k8s/service-chromadb.yaml",
+    "deploy/k8s/service-api.yaml",
+    "deploy/k8s/networkpolicy.yaml"
+  ],
+  "policy_note": "Kyverno/OPA CRDs were not installed in the throwaway kind cluster; deploy/policies were recorded as validated statically only for this run.",
+  "manifest_adjustments": [
+    "deployment-chromadb.yaml: Chroma startup command overrides the image log-config argument so the non-root container does not need write access to /chroma/chroma.log.",
+    "deployment-chromadb.yaml: Chroma data volume remains mounted at /chroma/chroma, preserving the image filesystem required for chromadb/log_config.yml.",
+    "networkpolicy.yaml: API egress and Chroma ingress allow both 8000 target-port and 8001 service-port semantics for CNI compatibility."
+  ],
+  "checks": [
+    {
+      "id": "T3-CHROMA-DIRECT-SAME-NS",
+      "control": "SC-7",
+      "expected": "same-namespace pod without app=eugene-api cannot reach Chroma service directly",
+      "actual": {
+        "status": "blocked_or_error",
+        "error_type": "URLError",
+        "error": "<urlopen error timed out>",
+        "target": "http://10.96.240.152:8001/api/v1/heartbeat"
+      },
+      "status": "PASS"
+    },
+    {
+      "id": "T3-CHROMA-DIRECT-OTHER-NS",
+      "control": "SC-7",
+      "expected": "pod in another namespace cannot reach Chroma service directly",
+      "actual": {
+        "status": "blocked_or_error",
+        "error_type": "URLError",
+        "error": "<urlopen error timed out>",
+        "target": "http://10.96.240.152:8001/api/v1/heartbeat"
+      },
+      "status": "PASS"
+    },
+    {
+      "id": "T3-API-TO-CHROMA",
+      "control": "SC-7",
+      "expected": "eugene-api pod can reach Chroma through the allowed path",
+      "actual": {
+        "status": "connected",
+        "code": 200,
+        "body": "{\\\"nanosecond heartbeat\\\":1781238656687952090}",
+        "target": "http://chromadb.eugene-ai.svc.cluster.local:8001/api/v1/heartbeat"
+      },
+      "status": "PASS"
+    },
+    {
+      "id": "T3-RAPID-QUERY",
+      "control": "SI-4",
+      "expected": "rapid valid /query calls with one token are rate limited after configured cap of 60/minute",
+      "actual": {
+        "attempts": 65,
+        "first_429": 61,
+        "counts": {
+          "503": 60,
+          "429": 5
+        },
+        "note": "The first 60 requests reached retrieval and returned 503 because the throwaway Chroma instance had no ingested corpus; rate limiting is evaluated before retrieval and returned 429 starting at request 61."
+      },
+      "status": "PASS"
+    }
+  ],
+  "overall_status": "PASS",
+  "cleanup_required": "kind delete cluster --name cap2-sprint2"
+}

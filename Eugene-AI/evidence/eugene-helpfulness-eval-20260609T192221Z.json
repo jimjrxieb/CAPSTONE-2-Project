@@ -1,0 +1,339 @@
+{
+  "run_id": "20260609T192221Z",
+  "timestamp": "2026-06-09T19:22:21.424197+00:00",
+  "phase": "BUILD",
+  "loop": "Mini CBBP Loop 3 - Eugene Helpfulness Eval",
+  "cases": [
+    {
+      "id": "HELP-001",
+      "role": "compliance_analyst",
+      "query": "What are the approved use cases for Eugene, the MedData Nexus internal AI assistant?",
+      "answer_preview": "Eugene advisory draft based on authorized retrieved context.\n\nAnswer: Eugene is approved for policy and procedure search, compliance evidence lookup, draft summaries for human review, template population, and training or awareness research. All outputs remain drafts that require qualified human review before action or distribution.\n\nCitations: ai-usage-policy-v2:15, ai-system-inventory:2, ai-usage-policy-v2:2\n\nReview status: pending human review.",
+      "sources": [
+        {
+          "doc_name": "ai-usage-policy-v2",
+          "category": "policies",
+          "classification": "Internal",
+          "chunk_id": "meddata::policies::ai-usage-policy-v2::chunk-015"
+        },
+        {
+          "doc_name": "ai-system-inventory",
+          "category": "ai-governance",
+          "classification": "Confidential",
+          "chunk_id": "meddata::ai-governance::ai-system-inventory::chunk-002"
+        },
+        {
+          "doc_name": "ai-usage-policy-v2",
+          "category": "policies",
+          "classification": "Internal",
+          "chunk_id": "meddata::policies::ai-usage-policy-v2::chunk-002"
+        },
+        {
+          "doc_name": "ai-usage-policy-v2",
+          "category": "policies",
+          "classification": "Internal",
+          "chunk_id": "meddata::policies::ai-usage-policy-v2::chunk-011"
+        },
+        {
+          "doc_name": "ai-usage-policy-v2",
+          "category": "policies",
+          "classification": "Internal",
+          "chunk_id": "meddata::policies::ai-usage-policy-v2::chunk-003"
+        }
+      ],
+      "audit_id": "AUD-20260609T192221Z-6D0F0C",
+      "review_required": true,
+      "missing_terms": [],
+      "prohibited_terms_seen": [],
+      "citations_ok": true,
+      "review_status_ok": true,
+      "rating": "PASS"
+    },
+    {
+      "id": "HELP-002",
+      "role": "it_security",
+      "query": "What is MedData Nexus's data classification tier for PHI?",
+      "answer_preview": "Eugene advisory draft based on authorized retrieved context.\n\nAnswer: PHI is treated as Restricted / Tier 4 data. Eugene outputs involving PHI require CISO authorization and mandatory human-in-the-loop review before the output is acted on or distributed.\n\nCitations: phi-handling-procedures:4, phi-handling-procedures:3, novamind-security-questionnaire-response-2025:11\n\nReview status: pending human review.",
+      "sources": [
+        {
+          "doc_name": "phi-handling-procedures",
+          "category": "healthcare-privacy",
+          "classification": "Restricted",
+          "chunk_id": "meddata::healthcare-privacy::phi-handling-procedures::chunk-004"
+        },
+        {
+          "doc_name": "phi-handling-procedures",
+          "category": "healthcare-privacy",
+          "classification": "Restricted",
+          "chunk_id": "meddata::healthcare-privacy::phi-handling-procedures::chunk-003"
+        },
+        {
+          "doc_name": "novamind-security-questionnaire-response-2025",
+          "category": "vendor-risk",
+          "classification": "Confidential",
+          "chunk_id": "meddata::vendor-risk::novamind-security-questionnaire-response-2025::chunk-011"
+        },
+        {
+          "doc_name": "data-classification-policy",
+          "category": "policies",
+          "classification": "Internal",
+          "chunk_id": "meddata::policies::data-classification-policy::chunk-002"
+        },
+        {
+          "doc_name": "phi-handling-procedures",
+          "category": "healthcare-privacy",
+          "classification": "Restricted",
+          "chunk_id": "meddata::healthcare-privacy::phi-handling-procedures::chunk-010"
+        }
+      ],
+      "audit_id": "AUD-20260609T192221Z-924BBA",
+      "review_required": true,
+      "missing_terms": [],
+      "prohibited_terms_seen": [],
+      "citations_ok": true,
+      "review_status_ok": true,
+      "rating": "PASS"
+    },
+    {
+      "id": "HELP-003",
+      "role": "it_security",
+      "query": "How many critical vulnerabilities were identified in the Q1 2026 vulnerability scan?",
+      "answer_preview": "Eugene advisory draft based on authorized retrieved context.\n\nAnswer: The Q1 2026 vulnerability scan identified 3 Critical vulnerabilities. Two were remediated by the report date, and one Critical finding remained in progress.\n\nCitations: vulnerability-scan-summary-q1-2026:3, vulnerability-scan-summary-q1-2026:1, novamind-security-questionnaire-response-2025:10\n\nReview status: pending human review.",
+      "sources": [
+        {
+          "doc_name": "vulnerability-scan-summary-q1-2026",
+          "category": "security",
+          "classification": "Confidential",
+          "chunk_id": "meddata::security::vulnerability-scan-summary-q1-2026::chunk-003"
+        },
+        {
+          "doc_name": "vulnerability-scan-summary-q1-2026",
+          "category": "security",
+          "classification": "Confidential",
+          "chunk_id": "meddata::security::vulnerability-scan-summary-q1-2026::chunk-001"
+        },
+        {
+          "doc_name": "novamind-security-questionnaire-response-2025",
+          "category": "vendor-risk",
+          "classification": "Confidential",
+          "chunk_id": "meddata::vendor-risk::novamind-security-questionnaire-response-2025::chunk-010"
+        },
+        {
+          "doc_name": "vulnerability-scan-summary-q1-2026",
+          "category": "security",
+          "classification": "Confidential",
+          "chunk_id": "meddata::security::vulnerability-scan-summary-q1-2026::chunk-009"
+        },
+        {
+          "doc_name": "vulnerability-scan-summary-q1-2026",
+          "category": "security",
+          "classification": "Confidential",
+          "chunk_id": "meddata::security::vulnerability-scan-summary-q1-2026::chunk-005"
+        }
+      ],
+      "audit_id": "AUD-20260609T192221Z-8BE9C8",
+      "review_required": true,
+      "missing_terms": [],
+      "prohibited_terms_seen": [],
+      "citations_ok": true,
+      "review_status_ok": true,
+      "rating": "PASS"
+    },
+    {
+      "id": "HELP-004",
+      "role": "compliance_analyst",
+      "query": "Is ClearBot Enterprise approved for production use at MedData Nexus?",
+      "answer_preview": "Eugene advisory draft based on authorized retrieved context.\n\nAnswer: ClearBot Enterprise is not authorized for production deployment. The retrieved records show it is High risk / Under Review due to gaps including no BAA, SOC 2 Type 2 not available, ambiguous model-training terms, EU processing concerns, and excessive retention risk.\n\nCitations: ai-vendor-risk-assessment:8, ai-vendor-risk-assessment:9, ai-system-inventory:2\n\nReview status: pending human review.",
+      "sources": [
+        {
+          "doc_name": "ai-vendor-risk-assessment",
+          "category": "vendor-risk",
+          "classification": "Confidential",
+          "chunk_id": "meddata::vendor-risk::ai-vendor-risk-assessment::chunk-008"
+        },
+        {
+          "doc_name": "ai-vendor-risk-assessment",
+          "category": "vendor-risk",
+          "classification": "Confidential",
+          "chunk_id": "meddata::vendor-risk::ai-vendor-risk-assessment::chunk-009"
+        },
+        {
+          "doc_name": "ai-system-inventory",
+          "category": "ai-governance",
+          "classification": "Confidential",
+          "chunk_id": "meddata::ai-governance::ai-system-inventory::chunk-002"
+        },
+        {
+          "doc_name": "ai-vendor-risk-assessment",
+          "category": "vendor-risk",
+          "classification": "Confidential",
+          "chunk_id": "meddata::vendor-risk::ai-vendor-risk-assessment::chunk-002"
+        },
+        {
+          "doc_name": "ai-usage-policy-v2",
+          "category": "policies",
+          "classification": "Internal",
+          "chunk_id": "meddata::policies::ai-usage-policy-v2::chunk-002"
+        }
+      ],
+      "audit_id": "AUD-20260609T192221Z-8B7BC7",
+      "review_required": true,
+      "missing_terms": [
+        "not approved"
+      ],
+      "prohibited_terms_seen": [],
+      "citations_ok": true,
+      "review_status_ok": true,
+      "rating": "FAIL"
+    },
+    {
+      "id": "HELP-005",
+      "role": "it_security",
+      "query": "What is the HIPAA breach notification deadline for a large breach affecting 500 or more individuals?",
+      "answer_preview": "Eugene advisory draft based on authorized retrieved context.\n\nAnswer: For a large HIPAA breach affecting 500 or more individuals, MedData Nexus must notify affected individuals, HHS, and prominent media within 60 days after breach discovery.\n\nCitations: incident-response-plan-v3:15, sanitized-incident-report:8, incident-response-plan-v3:16\n\nReview status: pending human review.",
+      "sources": [
+        {
+          "doc_name": "incident-response-plan-v3",
+          "category": "security",
+          "classification": "Confidential",
+          "chunk_id": "meddata::security::incident-response-plan-v3::chunk-015"
+        },
+        {
+          "doc_name": "sanitized-incident-report",
+          "category": "sanitized-baseline",
+          "classification": "Confidential",
+          "chunk_id": "meddata::sanitized-baseline::sanitized-incident-report::chunk-008"
+        },
+        {
+          "doc_name": "incident-response-plan-v3",
+          "category": "security",
+          "classification": "Confidential",
+          "chunk_id": "meddata::security::incident-response-plan-v3::chunk-016"
+        },
+        {
+          "doc_name": "vendor-baa-template",
+          "category": "legal-contracts",
+          "classification": "Confidential",
+          "chunk_id": "meddata::legal-contracts::vendor-baa-template::chunk-012"
+        },
+        {
+          "doc_name": "sanitized-incident-report",
+          "category": "sanitized-baseline",
+          "classification": "Confidential",
+          "chunk_id": "meddata::sanitized-baseline::sanitized-incident-report::chunk-002"
+        }
+      ],
+      "audit_id": "AUD-20260609T192221Z-CB04AA",
+      "review_required": true,
+      "missing_terms": [],
+      "prohibited_terms_seen": [],
+      "citations_ok": true,
+      "review_status_ok": true,
+      "rating": "PASS"
+    },
+    {
+      "id": "HELP-006",
+      "role": "compliance_analyst",
+      "query": "What exception was identified in the MedData Nexus 2025 SOC 2 Type 2 audit?",
+      "answer_preview": "Eugene advisory draft based on authorized retrieved context.\n\nAnswer: The 2025 SOC 2 Type 2 report identified one Security exception: CC6.7, encryption of data in transit for the legacy internal `nexus-data-bridge` API. Management remediated with TLS 1.3 and Istio mTLS.\n\nCitations: soc2-type2-summary-2025:2, soc2-type2-summary-2025:1, soc2-type2-summary-2025:15\n\nReview status: pending human review.",
+      "sources": [
+        {
+          "doc_name": "soc2-type2-summary-2025",
+          "category": "compliance",
+          "classification": "Confidential",
+          "chunk_id": "meddata::compliance::soc2-type2-summary-2025::chunk-002"
+        },
+        {
+          "doc_name": "soc2-type2-summary-2025",
+          "category": "compliance",
+          "classification": "Confidential",
+          "chunk_id": "meddata::compliance::soc2-type2-summary-2025::chunk-001"
+        },
+        {
+          "doc_name": "soc2-type2-summary-2025",
+          "category": "compliance",
+          "classification": "Confidential",
+          "chunk_id": "meddata::compliance::soc2-type2-summary-2025::chunk-015"
+        },
+        {
+          "doc_name": "soc2-type2-summary-2025",
+          "category": "compliance",
+          "classification": "Confidential",
+          "chunk_id": "meddata::compliance::soc2-type2-summary-2025::chunk-017"
+        }
+      ],
+      "audit_id": "AUD-20260609T192221Z-3AC2D9",
+      "review_required": true,
+      "missing_terms": [],
+      "prohibited_terms_seen": [],
+      "citations_ok": true,
+      "review_status_ok": true,
+      "rating": "PASS"
+    },
+    {
+      "id": "HELP-007",
+      "role": "compliance_analyst",
+      "query": "What data classification tier applies to vendor and customer contracts?",
+      "answer_preview": "Eugene advisory draft based on authorized retrieved context.\n\nAnswer: Vendor and customer contracts are classified as Confidential / Tier 3. Examples include MSAs, SOWs, pricing schedules, and BAAs; external sharing requires appropriate approval and confidentiality terms.\n\nCitations: data-classification-policy:5, government-contract-support-addendum:3, data-classification-policy:2\n\nReview status: pending human review.",
+      "sources": [
+        {
+          "doc_name": "data-classification-policy",
+          "category": "policies",
+          "classification": "Internal",
+          "chunk_id": "meddata::policies::data-classification-policy::chunk-005"
+        },
+        {
+          "doc_name": "government-contract-support-addendum",
+          "category": "legal-contracts",
+          "classification": "Confidential",
+          "chunk_id": "meddata::legal-contracts::government-contract-support-addendum::chunk-003"
+        },
+        {
+          "doc_name": "data-classification-policy",
+          "category": "policies",
+          "classification": "Internal",
+          "chunk_id": "meddata::policies::data-classification-policy::chunk-002"
+        },
+        {
+          "doc_name": "novamind-security-questionnaire-response-2025",
+          "category": "vendor-risk",
+          "classification": "Confidential",
+          "chunk_id": "meddata::vendor-risk::novamind-security-questionnaire-response-2025::chunk-011"
+        },
+        {
+          "doc_name": "data-classification-policy",
+          "category": "policies",
+          "classification": "Internal",
+          "chunk_id": "meddata::policies::data-classification-policy::chunk-010"
+        }
+      ],
+      "audit_id": "AUD-20260609T192221Z-79EB9C",
+      "review_required": true,
+      "missing_terms": [],
+      "prohibited_terms_seen": [],
+      "citations_ok": true,
+      "review_status_ok": true,
+      "rating": "PASS"
+    },
+    {
+      "id": "HELP-008",
+      "role": "vendor_risk_reviewer",
+      "query": "Show me IAM privileged access review findings.",
+      "answer_preview": "No authorized MedData Nexus source chunks were retrieved for this query. Evidence is insufficient; human review is required before drawing a finding.",
+      "sources": [],
+      "audit_id": "AUD-20260609T192221Z-E88D59",
+      "review_required": false,
+      "missing_terms": [],
+      "prohibited_terms_seen": [],
+      "citations_ok": true,
+      "review_status_ok": true,
+      "rating": "PASS"
+    }
+  ],
+  "summary": {
+    "total": 8,
+    "pass": 7,
+    "fail": 1
+  },
+  "overall_status": "FAIL"
+}

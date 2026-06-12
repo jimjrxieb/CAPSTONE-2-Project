@@ -1,0 +1,277 @@
+{
+  "run_id": "20260609T193217Z",
+  "timestamp": "2026-06-09T19:32:17.033780+00:00",
+  "phase": "BREAK",
+  "loop": "Mini CBBP Loop 3 - Corpus Contamination",
+  "system": "CAP2-AI-001 Eugene RAG ingest pipeline",
+  "cases": [
+    {
+      "case_id": "CORPUS-BREAK-001",
+      "name": "Unsigned manifest entry alerts RAG owner",
+      "action": "Attempt to ingest a manifest-approved document with no owner.",
+      "expected_control": "Ingest blocks and writes corpus-owner alert before embedding.",
+      "observed": {
+        "ingest_blocked": true,
+        "manifest_alerts": [
+          {
+            "source_path": "source-documents/policies/unsigned-policy.md",
+            "reason": "MISSING_MANIFEST_METADATA",
+            "missing_fields": [
+              "owner"
+            ]
+          }
+        ],
+        "rejected": [],
+        "corpus_alert": {
+          "alert_id": "CORPUS-20260609T193217Z-AC58B5",
+          "timestamp": "2026-06-09T19:32:17.031072+00:00",
+          "alert_type": "MANIFEST_CONTRACT_VIOLATION",
+          "severity": "HIGH",
+          "owner": "RAG Corpus Owner",
+          "findings": [
+            {
+              "source_path": "source-documents/policies/unsigned-policy.md",
+              "reason": "MISSING_MANIFEST_METADATA",
+              "missing_fields": [
+                "owner"
+              ]
+            }
+          ],
+          "action_required": "Quarantine unapproved or unsigned corpus documents before ingest continues.",
+          "framework_tags": {
+            "owasp_llm": [
+              "LLM03 Supply Chain",
+              "LLM06 Sensitive Information Disclosure"
+            ],
+            "nist_ai_rmf": [
+              "MAP 3.2",
+              "MEASURE 2.7",
+              "MANAGE 2.3",
+              "GOVERN 1.5"
+            ],
+            "mitre_atlas": [
+              "AML.T0024.000 Exfiltration via Retrieval",
+              "AML.T0051 Prompt Injection"
+            ]
+          }
+        }
+      },
+      "framework_tags": {
+        "owasp_llm": [
+          "LLM03 Supply Chain",
+          "LLM06 Sensitive Information Disclosure"
+        ],
+        "nist_ai_rmf": [
+          "MAP 3.2",
+          "MEASURE 2.7",
+          "MANAGE 2.3",
+          "GOVERN 1.5"
+        ],
+        "mitre_atlas": [
+          "AML.T0024.000 Exfiltration via Retrieval",
+          "AML.T0051 Prompt Injection"
+        ]
+      },
+      "rating": "PASS",
+      "owner_if_fail": "RAG Corpus Owner + Platform Engineering Lead"
+    },
+    {
+      "case_id": "CORPUS-BREAK-002",
+      "name": "Unapproved baseline file alerts RAG owner",
+      "action": "Place a new source document on disk without adding it to the corpus manifest.",
+      "expected_control": "Manifest contract scan detects unapproved file and blocks ingest.",
+      "observed": {
+        "ingest_blocked": true,
+        "manifest_alerts": [
+          {
+            "source_path": "source-documents/security/rogue.md",
+            "reason": "UNAPPROVED_FILE_ON_DISK"
+          }
+        ],
+        "rejected": [],
+        "corpus_alert": {
+          "alert_id": "CORPUS-20260609T193217Z-8BA178",
+          "timestamp": "2026-06-09T19:32:17.032022+00:00",
+          "alert_type": "MANIFEST_CONTRACT_VIOLATION",
+          "severity": "HIGH",
+          "owner": "RAG Corpus Owner",
+          "findings": [
+            {
+              "source_path": "source-documents/security/rogue.md",
+              "reason": "UNAPPROVED_FILE_ON_DISK"
+            }
+          ],
+          "action_required": "Quarantine unapproved or unsigned corpus documents before ingest continues.",
+          "framework_tags": {
+            "owasp_llm": [
+              "LLM03 Supply Chain",
+              "LLM06 Sensitive Information Disclosure"
+            ],
+            "nist_ai_rmf": [
+              "MAP 3.2",
+              "MEASURE 2.7",
+              "MANAGE 2.3",
+              "GOVERN 1.5"
+            ],
+            "mitre_atlas": [
+              "AML.T0024.000 Exfiltration via Retrieval",
+              "AML.T0051 Prompt Injection"
+            ]
+          }
+        }
+      },
+      "framework_tags": {
+        "owasp_llm": [
+          "LLM03 Supply Chain",
+          "LLM06 Sensitive Information Disclosure"
+        ],
+        "nist_ai_rmf": [
+          "MAP 3.2",
+          "MEASURE 2.7",
+          "MANAGE 2.3",
+          "GOVERN 1.5"
+        ],
+        "mitre_atlas": [
+          "AML.T0024.000 Exfiltration via Retrieval",
+          "AML.T0051 Prompt Injection"
+        ]
+      },
+      "rating": "PASS",
+      "owner_if_fail": "RAG Corpus Owner + Platform Engineering Lead"
+    },
+    {
+      "case_id": "CORPUS-BREAK-003",
+      "name": "Poisoned document rejected before embedding",
+      "action": "Attempt to ingest a manifested document containing prompt-injection instructions.",
+      "expected_control": "Document injection scanner rejects content and alerts RAG owner.",
+      "observed": {
+        "ingest_blocked": false,
+        "manifest_alerts": [],
+        "rejected": [
+          {
+            "source_path": "source-documents/policies/poisoned-policy.md",
+            "reason": "InjectionDetectedError"
+          }
+        ],
+        "corpus_alert": {
+          "alert_id": "CORPUS-20260609T193217Z-BC76E5",
+          "timestamp": "2026-06-09T19:32:17.032819+00:00",
+          "alert_type": "UNSAFE_DOCUMENT_REJECTED",
+          "severity": "HIGH",
+          "owner": "RAG Corpus Owner",
+          "findings": [
+            {
+              "source_path": "source-documents/policies/poisoned-policy.md",
+              "reason": "InjectionDetectedError"
+            }
+          ],
+          "action_required": "Remove, sanitize, or formally approve rejected documents before ingest.",
+          "framework_tags": {
+            "owasp_llm": [
+              "LLM03 Supply Chain",
+              "LLM06 Sensitive Information Disclosure"
+            ],
+            "nist_ai_rmf": [
+              "MAP 3.2",
+              "MEASURE 2.7",
+              "MANAGE 2.3",
+              "GOVERN 1.5"
+            ],
+            "mitre_atlas": [
+              "AML.T0024.000 Exfiltration via Retrieval",
+              "AML.T0051 Prompt Injection"
+            ]
+          }
+        }
+      },
+      "framework_tags": {
+        "owasp_llm": [
+          "LLM03 Supply Chain",
+          "LLM06 Sensitive Information Disclosure"
+        ],
+        "nist_ai_rmf": [
+          "MAP 3.2",
+          "MEASURE 2.7",
+          "MANAGE 2.3",
+          "GOVERN 1.5"
+        ],
+        "mitre_atlas": [
+          "AML.T0024.000 Exfiltration via Retrieval",
+          "AML.T0051 Prompt Injection"
+        ]
+      },
+      "rating": "PASS",
+      "owner_if_fail": "RAG Corpus Owner + Platform Engineering Lead"
+    },
+    {
+      "case_id": "CORPUS-BREAK-004",
+      "name": "Secret/PHI sample rejected before embedding",
+      "action": "Attempt to ingest a manifested document containing fake credential and PHI-like patterns.",
+      "expected_control": "Secret/PHI scanners reject content and alert RAG owner.",
+      "observed": {
+        "ingest_blocked": false,
+        "manifest_alerts": [],
+        "rejected": [
+          {
+            "source_path": "source-documents/security/unsafe-incident.md",
+            "reason": "SecretDetectedError"
+          }
+        ],
+        "corpus_alert": {
+          "alert_id": "CORPUS-20260609T193217Z-123DC1",
+          "timestamp": "2026-06-09T19:32:17.033602+00:00",
+          "alert_type": "UNSAFE_DOCUMENT_REJECTED",
+          "severity": "HIGH",
+          "owner": "RAG Corpus Owner",
+          "findings": [
+            {
+              "source_path": "source-documents/security/unsafe-incident.md",
+              "reason": "SecretDetectedError"
+            }
+          ],
+          "action_required": "Remove, sanitize, or formally approve rejected documents before ingest.",
+          "framework_tags": {
+            "owasp_llm": [
+              "LLM03 Supply Chain",
+              "LLM06 Sensitive Information Disclosure"
+            ],
+            "nist_ai_rmf": [
+              "MAP 3.2",
+              "MEASURE 2.7",
+              "MANAGE 2.3",
+              "GOVERN 1.5"
+            ],
+            "mitre_atlas": [
+              "AML.T0024.000 Exfiltration via Retrieval",
+              "AML.T0051 Prompt Injection"
+            ]
+          }
+        }
+      },
+      "framework_tags": {
+        "owasp_llm": [
+          "LLM03 Supply Chain",
+          "LLM06 Sensitive Information Disclosure"
+        ],
+        "nist_ai_rmf": [
+          "MAP 3.2",
+          "MEASURE 2.7",
+          "MANAGE 2.3",
+          "GOVERN 1.5"
+        ],
+        "mitre_atlas": [
+          "AML.T0024.000 Exfiltration via Retrieval",
+          "AML.T0051 Prompt Injection"
+        ]
+      },
+      "rating": "PASS",
+      "owner_if_fail": "RAG Corpus Owner + Platform Engineering Lead"
+    }
+  ],
+  "summary": {
+    "total": 4,
+    "pass": 4,
+    "fail": 0
+  },
+  "overall_status": "PASS"
+}

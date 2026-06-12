@@ -1,0 +1,27 @@
+name: AI-Assisted PR Label Check
+
+on:
+  pull_request:
+    paths:
+      - 'src/**'
+      - 'requirements.txt'
+      - 'config/**'
+      - '.github/workflows/**'
+
+jobs:
+  label-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check ai-assisted label
+        run: |
+          LABELS=$(gh pr view ${{ github.event.pull_request.number }} \
+            --json labels --jq '.labels[].name')
+          if echo "$LABELS" | grep -q "ai-assisted"; then
+            echo "ai-assisted label present — OK"
+          else
+            echo "ERROR: ai-assisted label is required for changes to src/, requirements.txt, or config/"
+            echo "Add the 'ai-assisted' label to this PR if AI tools were used in any part of this change."
+            exit 1
+          fi
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -1,0 +1,29 @@
+name: SCA Gate — pip-audit + pin enforcement
+
+on: [pull_request]
+
+jobs:
+  pip-audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install pip-audit
+        run: pip install pip-audit==2.7.3
+
+      - name: Run pip-audit
+        run: pip-audit -r requirements.txt --strict
+
+      - name: Enforce exact version pins
+        run: |
+          if grep -E '^[a-zA-Z][a-zA-Z0-9_-]*[>=~^]' requirements.txt | grep -v '=='; then
+            echo "ERROR: Unpinned or range-versioned dependency detected."
+            echo "All packages must use == for exact pinning."
+            exit 1
+          fi
+          echo "All dependencies are exactly pinned — OK"

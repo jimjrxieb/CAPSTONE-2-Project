@@ -1,0 +1,40 @@
+{
+  "run_id": "20260609T141310Z",
+  "timestamp": "2026-06-09T14:13:10.008424+00:00",
+  "phase": "BUILD",
+  "loop": "Mini CBBP Loop 1 - Chatbox BUILD",
+  "checks": {
+    "missing_role_blocked": true,
+    "invalid_role_blocked": true,
+    "high_risk_warning": false,
+    "source_citations_present": false,
+    "injection_rejected": false
+  },
+  "overall_status": "FAIL",
+  "results": {
+    "missing_role": {
+      "response_preview": "Select a role before submitting a query.",
+      "sources": "",
+      "status": "Blocked: role required.",
+      "audit_id": ""
+    },
+    "invalid_role": {
+      "response_preview": "Selected role is not allowed.",
+      "sources": "",
+      "status": "Blocked: invalid role.",
+      "audit_id": ""
+    },
+    "high_risk": {
+      "response_preview": "Connection error: [Errno 111] Connection refused",
+      "sources": "",
+      "status": "API unavailable.",
+      "audit_id": ""
+    },
+    "injection": {
+      "response_preview": "Connection error: [Errno 111] Connection refused",
+      "sources": "",
+      "status": "API unavailable.",
+      "audit_id": ""
+    }
+  }
+}

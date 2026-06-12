@@ -1,0 +1,9 @@
+# Security-sensitive paths require jimjrxieb as required reviewer
+# Any PR touching these files cannot merge without explicit approval
+
+src/api/routes/query.py     @jimjrxieb
+src/guardrails/             @jimjrxieb
+src/audit/                  @jimjrxieb
+config/                     @jimjrxieb
+.env.example                @jimjrxieb
+CODEOWNERS                  @jimjrxieb

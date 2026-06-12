@@ -1,0 +1,7 @@
+# Optional Loop 4+ agent orchestration dependencies.
+# Install only when CrewAI implementation resumes; Sprint 1 does not import this path.
+
+crewai==0.30.11
+langchain==0.2.5
+langchain-community==0.2.5
+langchain-ollama==0.1.1
