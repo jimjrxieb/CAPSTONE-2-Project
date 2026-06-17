@@ -14,10 +14,19 @@ For general orientation, read:
 For BUILD work, read this exact sequence before proposing or changing implementation:
 
 1. `CAPSTONE-2-AI-SECURITY-ASSESSMENT-LAB/CBBP-PLAN/BUILD/README.md`
-2. `CAPSTONE-2-AI-SECURITY-ASSESSMENT-LAB/CBBP-PLAN/BUILD/sprint1-status.md`
-3. `CAPSTONE-2-AI-SECURITY-ASSESSMENT-LAB/CBBP-PLAN/BUILD/build-readiness-rubric.md`
-4. `CAPSTONE-2-AI-SECURITY-ASSESSMENT-LAB/CBBP-PLAN/BUILD/comply-to-build-handoff.md`
-5. `CAPSTONE-2-AI-SECURITY-ASSESSMENT-LAB/CBBP-PLAN/COMPLY/traceability-matrix.md`
+2. `CAPSTONE-2-AI-SECURITY-ASSESSMENT-LAB/CBBP-PLAN/BUILD/BUILD-PIPELINE-STATUS.md`
+3. `CAPSTONE-2-AI-SECURITY-ASSESSMENT-LAB/CBBP-PLAN/BUILD/terminal-codex-handoff.md`
+4. `CAPSTONE-2-AI-SECURITY-ASSESSMENT-LAB/CBBP-PLAN/BUILD/4-completedbuilds/sprint1-status.md`
+5. `CAPSTONE-2-AI-SECURITY-ASSESSMENT-LAB/CBBP-PLAN/BUILD/implementedbuilds/build-readiness-rubric.md`
+6. `CAPSTONE-2-AI-SECURITY-ASSESSMENT-LAB/CBBP-PLAN/BUILD/comply-to-build-handoff.md`
+7. `CAPSTONE-2-AI-SECURITY-ASSESSMENT-LAB/CBBP-PLAN/COMPLY/traceability-matrix.md`
+
+For continuing an approved BUILD from a fresh terminal Codex session, also read:
+
+1. The approved build file under `CAPSTONE-2-AI-SECURITY-ASSESSMENT-LAB/CBBP-PLAN/BUILD/2-approvedbuilds/`
+2. `CAPSTONE-2-AI-SECURITY-ASSESSMENT-LAB/CBBP-PLAN/BUILD/templates/approved-build-template.md`
+
+If the approved build lacks source traceability, target files, out-of-scope boundaries, acceptance checks, or BREAK/PROVE handoff, stop and report the missing fields instead of implementing.
 
 After reading those files, report:
 
@@ -26,6 +35,30 @@ After reading those files, report:
 - what evidence already exists
 - what the next safest BUILD task should be
 - what BREAK test or PROVE evidence would close that task
+- if continuing an approved build: what exact files are in scope, what is out of scope, and what acceptance checks will be run
+
+For BREAK work, read this exact sequence before proposing or running any pentest:
+
+1. `CAPSTONE-2-AI-SECURITY-ASSESSMENT-LAB/CBBP-PLAN/BREAK/PENTEST-PIPELINE-STATUS.md`
+2. `CAPSTONE-2-AI-SECURITY-ASSESSMENT-LAB/CBBP-PLAN/BREAK/1-pentestplanning/SPRINT-PROGRAM-DESIGN.md`
+3. `CAPSTONE-2-AI-SECURITY-ASSESSMENT-LAB/CBBP-PLAN/BREAK/1-pentestplanning/SPRINT-PROGRAM-PLAN.md`
+4. `CAPSTONE-2-AI-SECURITY-ASSESSMENT-LAB/CBBP-PLAN/BREAK/0-scope/pentester-scenarios/README.md`
+5. `CAPSTONE-2-AI-SECURITY-ASSESSMENT-LAB/CBBP-PLAN/BREAK/0-scope/pentester-scenarios/04-rag-unauthorized-retrieval.md` (the break-and-watch exemplar every break-plan follows)
+6. `CAPSTONE-2-AI-SECURITY-ASSESSMENT-LAB/CBBP-PLAN/BREAK/0-scope/BUILD-to-BREAK-handoff.md`
+
+For executing an approved pentest sprint from a fresh terminal Codex session, also read:
+
+1. The signed sprint file under `CAPSTONE-2-AI-SECURITY-ASSESSMENT-LAB/CBBP-PLAN/BREAK/2-pentestapproved/`
+2. The break-plan it references under `CAPSTONE-2-AI-SECURITY-ASSESSMENT-LAB/CBBP-PLAN/BREAK/0-scope/pentester-scenarios/`
+
+BREAK rules a fresh session must respect:
+
+- The pentest agent attacks and watches; it never provisions. If a scenario needs Falco/SIEM or a cluster, the deploy agent stands it up first.
+- BREAK runs are local-lab only. Never reach for external offensive tooling (`nmap`, `sqlmap`, `nuclei`, `hydra`, etc.) — the PreToolUse hook blocks it by design.
+- A control that blocks but does not log is half a control: confirm the alert fired (Falco/SIEM + audit entry), not just that the attack was denied.
+- A security failure becomes a POA&M routed to BUILD — never "fixed" inside BREAK.
+
+After reading the BREAK sequence, report: which scenarios already have alert-backed evidence, which need a re-run with the alert backend live, which need a net-new runner built, and what the next safest BREAK task is.
 
 ## CBBP Method
 
@@ -133,14 +166,11 @@ Implemented/local evidence exists for:
 
 Known phase-2 work includes:
 
-- deployed-cluster live validation
 - remote GitHub CI proof
 - external identity provider integration
-- optional model-generation quality evaluation
 - expanded n8n/CrewAI automation
 - cloud AI service extensions under a new COMPLY boundary
 
 ## Commit Hygiene
 
 Keep commits focused and explainable. Do not commit ignored local runtime state, personal prep notes, ChromaDB databases, cache files, or real secrets.
-

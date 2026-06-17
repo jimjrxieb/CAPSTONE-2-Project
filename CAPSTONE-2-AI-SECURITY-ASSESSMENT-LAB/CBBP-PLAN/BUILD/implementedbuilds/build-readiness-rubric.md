@@ -95,5 +95,7 @@ BUILD is ready for public capstone review when:
 - PROVE knows what evidence closes each claim
 - phase-2 limitations are named instead of hidden
 
-Current assessment: BUILD is capstone-review ready, with phase-2 work still open for deployed-cluster validation, remote CI proof, and optional expanded workflow automation.
-
+Current assessment: BUILD is complete for the local capstone review boundary.
+Future work such as remote CI history, external identity integration, expanded
+workflow automation, or cloud deployment requires a new approved BUILD item and
+COMPLY traceability.

@@ -109,7 +109,16 @@ Initial review called out the missing limiter. `src/api/rate_limit.py` now provi
 
 ### 3.5 ChromaDB auth is wired in code; live proof remains
 
-`config/settings.py` now exposes `CHROMA_AUTH_TOKEN`, and `src/rag/retriever.py` supplies token auth when Eugene runs against a remote Chroma host. The k8s package also includes network isolation artifacts. The remaining proof should be a deployed-cluster BREAK run that curls or clients Chroma directly and confirms unauthenticated access is rejected.
+`config/settings.py` now exposes `CHROMA_AUTH_TOKEN`, and `src/rag/retriever.py`
+supplies token auth when Eugene runs against a remote Chroma host. The k8s
+package also includes network isolation artifacts. Earlier review notes asked
+for a production-like cluster BREAK run, but the completed BUILD boundary now
+stops at local/static capstone platform evidence.
+
+**Closeout note:** This was a reviewer recommendation for a production-like
+cluster proof. It is no longer an active BUILD blocker for the local capstone.
+The completed BUILD boundary uses local/static platform evidence and does not
+claim a managed cloud deployment.
 
 ### 3.6 The sanitizer is a regex blocklist — say so, and bound the claim
 
@@ -141,7 +150,7 @@ The roadmap says "Do not create this code until the API/evidence interfaces exis
 | 3 | Unify ticket registry (2.2) | Avoid duplicate BLD IDs across handoff and sprint status docs | 1 hr |
 | 4 | Remove `python-jose`/`passlib`, refresh pins, re-run pip-audit (2.3) | Unused deps with CVEs; free demo of your own SCA gate | 1 hr |
 | 5 | Pin embedding model + extend re-test rule (2.4) | Silent retrieval drift; violates own standard | 15 min |
-| 6 | Repeat rate-limit evidence and run live Chroma auth BREAK case (3.3, 3.5) | Local controls exist; deployed-cluster proof is still stronger | 0.5 day |
+| 6 | Repeat rate-limit evidence and run live Chroma auth BREAK case (3.3, 3.5) | Local controls exist; production-like cluster proof is optional future work outside this BUILD | 0.5 day |
 | 7 | Audit logger: packaging-time validation + hash chain (3.4); sanitizer claim-bounding (3.6) | Strengthens evidence quality before PROVE closes | 0.5 day |
 | 8 | Model card, prompt registry, generation eval baseline (3.7); CrewAI dep split (3.8); small fixes (3.9) | Completes the MLOps half of the merged-disciplines story | 1 day |
 

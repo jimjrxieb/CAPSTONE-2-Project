@@ -80,6 +80,30 @@ Out of scope:
 - Platform control evidence for model pins, dependency pins, Chroma auth, NetworkPolicy, and rate limiting
 - Eugene helpfulness evaluation over business-use questions
 
+## Certification Alignment — CompTIA SecAI+ (CY0-001)
+
+This lab was built to double as hands-on proof for the CompTIA SecAI+ (CY0-001)
+exam domains. Every claim below is backed by a runnable artifact in this repo —
+scenario, scanner, evidence runner, or control mapping — not just narrative.
+
+| SecAI+ Domain (exam weight) | Demonstrated in this lab |
+| --- | --- |
+| **1 — Basic AI Concepts (17%)** | Local RAG pipeline (ChromaDB + local embedding function), Ollama `llama3.2:3b` deployment, role-filtered retrieval, manifest-gated ingestion, prompt-engineering harness, FastAPI serving layer |
+| **2 — Securing AI Systems (40%)** | Prompt-injection defense with BREAK tests, corpus poisoning / contamination BREAK tests, unauthorized-retrieval access control, output filtering for sensitive data, PHI + secret pre-ingestion scanners, ChromaDB token-auth and NetworkPolicy boundary, dependency-audit supply-chain gate, documented agentic trust boundaries |
+| **3 — AI-Assisted Security (24%)** | End-to-end AI-assisted security-assessment workflow, HITL-gated analysis, structured JSONL audit logging for behavioral tracking, AI-assisted PR labeling in CI, automated evidence runners as continuous validation |
+| **4 — AI Governance, Risk & Compliance (19%)** | NIST AI RMF, NIST 800-53, OWASP LLM Top 10, and MITRE ATLAS mappings; risk register; POA&M; findings report and executive summary; AI dev-tool governance model; corpus data classification; vendor risk for Ollama/ChromaDB |
+
+This lab is one half of a two-part proof: the **hands-on lab** (this repo) and the
+**GP-CONSULTING framework library** (control cards, framework crosswalks, AI-RMF /
+AI-600-1 references) that the lab instantiates from. Together they map to all four
+SecAI+ domains.
+
+Targeted hardening in progress to take Domains 2–4 from strong to comprehensive:
+adversarial scenarios for model inversion, membership inference, and embedding
+inversion; and assessment artifacts for output watermarking, AI-enabled threat
+landscape, AI-assisted incident response, bias/fairness, and regulatory context
+(EU AI Act, HIPAA AI guidance).
+
 ## CBBP Method
 
 This capstone uses **CBBP: COMPLY, BUILD, BREAK, PROVE**.
@@ -148,7 +172,7 @@ See `Eugene-AI/README.md` for full setup and test commands.
 
 ## Current Status
 
-This project is ready to present as a capstone lab. The core Eugene security controls, evidence runners, synthetic client package, and consulting deliverables are present. Remaining work is phase-2 hardening: external identity provider integration, deployed-cluster live validation, optional generation-model quality eval, and CI execution against a remote GitHub repository.
+This project is ready to present as a capstone lab. The core Eugene security controls, evidence runners, synthetic client package, consulting deliverables, and local CKS-style platform build scope are present. BUILD is complete for the local capstone. Future work sits outside this BUILD boundary: external identity provider integration if this becomes a production pilot, remote GitHub CI run history after publishing, expanded workflow automation, and cloud AI service extensions under a new COMPLY boundary.
 
 ## GitHub Publishing Notes
 

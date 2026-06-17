@@ -33,13 +33,42 @@ Paths below reflect the stage each doc lives in.
 | Order | File | Purpose |
 | ---: | --- | --- |
 | 1 | `comply-to-build-handoff.md` | Converts COMPLY findings, threats, and wishlist items into BUILD tickets. (root) |
-| 2 | `implementedbuilds/ai-dev-assist-harness.md` | Defines whether Codex / Claude Code are allowed and what boundaries they must follow. |
-| 3 | `implementedbuilds/build-readiness-rubric.md` | Scores whether BUILD is controlled, reviewable, and ready for BREAK. |
-| 4 | `implementedbuilds/eugene-build-harness.md` | Detailed implementation plan for Eugene's API, RAG path, guardrails, evidence, and workflow controls. |
-| 5 | `implementedbuilds/rag-pipeline-build.md` | RAG-specific build plan and evidence path. |
-| 6 | `4-completedbuilds/sprint1-status.md` | Sprint 1 implementation status and evidence. (also `sprint2-status.md`, `sprint2-plan.md`) |
-| 7 | `1-buildplanning/cks-platform-build-plan.md` | Container, Kubernetes, NetworkPolicy, and policy-control build path (future platform work). |
-| 8 | `crewai/` | Future agentic workflow design with human-control boundaries. (root) |
+| 2 | `BUILD-PIPELINE-STATUS.md` | Current kanban board for what is done, approved, under review, or deferred. |
+| 3 | `terminal-codex-handoff.md` | Worker instructions for continuing an approved build from a fresh terminal Codex session. |
+| 4 | `templates/approved-build-template.md` | Required fields for future approved builds. |
+| 5 | `implementedbuilds/ai-dev-assist-harness.md` | Defines whether Codex / Claude Code are allowed and what boundaries they must follow. |
+| 6 | `implementedbuilds/build-readiness-rubric.md` | Scores whether BUILD is controlled, reviewable, and ready for BREAK. |
+| 7 | `implementedbuilds/eugene-build-harness.md` | Detailed implementation plan for Eugene's API, RAG path, guardrails, evidence, and workflow controls. |
+| 8 | `implementedbuilds/rag-pipeline-build.md` | RAG-specific build plan and evidence path. |
+| 9 | `4-completedbuilds/sprint1-status.md` | Sprint 1 implementation status and evidence. (also `sprint2-status.md`, `sprint2-plan.md`) |
+| 10 | `4-completedbuilds/cks-platform-build-plan.md` | Container, Kubernetes, NetworkPolicy, and policy-control build path. |
+| 11 | `crewai/` | Future agentic workflow design with human-control boundaries. (root) |
+
+## Continuing An Approved Build
+
+A fresh terminal Codex session should not rely on chat history. Give it the
+approved build path and require it to read `AGENTS.md` plus
+`terminal-codex-handoff.md` before editing.
+
+Use this prompt shape:
+
+```text
+Read AGENTS.md and continue the approved build:
+CAPSTONE-2-AI-SECURITY-ASSESSMENT-LAB/CBBP-PLAN/BUILD/2-approvedbuilds/<file>.md
+
+Follow CBBP. Do not change anything outside the approved scope. If the approved
+build lacks source traceability, target files, out-of-scope boundaries,
+acceptance checks, or BREAK/PROVE handoff, stop and report what is missing.
+```
+
+Approved builds should follow `templates/approved-build-template.md`. At minimum
+they must name status, approver, source traceability, target files, out-of-scope
+boundaries, acceptance checks, BREAK handoff, PROVE handoff, and residual risk.
+
+When an approved build has been implemented and its acceptance checks have
+passed, move that build file out of `2-approvedbuilds/` and into
+`4-completedbuilds/`. Anything left in `2-approvedbuilds/` is still approved
+work, not completed work.
 
 ## Mini CBBP Build Loop
 
@@ -73,4 +102,3 @@ COMPLY finding -> BUILD ticket -> implemented artifact -> BREAK test -> PROVE ev
 ```
 
 If a build item cannot be traced in both directions, it is not ready.
-

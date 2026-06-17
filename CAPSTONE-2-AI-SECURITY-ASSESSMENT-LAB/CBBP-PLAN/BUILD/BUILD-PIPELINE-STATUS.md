@@ -12,16 +12,18 @@ Last updated: 2026-06-12
 
 | Stage | Contents |
 |---|---|
-| `1-buildplanning/` | `001-poam-0001-identity-binding-fix.md` (awaiting Gate 1), `cks-platform-build-plan.md` (future platform work) |
+| `1-buildplanning/` | — |
 | `2-approvedbuilds/` | — |
-| `implementedbuilds/` | `eugene-build-harness.md`, `rag-pipeline-build.md`, `ai-dev-assist-harness.md`, `model-decision-record.md`, `build-readiness-rubric.md`, `fable-enhancements.md` |
+| `templates/` | `approved-build-template.md` for future worker-ready builds |
+| `implementedbuilds/` | `eugene-build-harness.md`, `rag-pipeline-build.md`, `ai-dev-assist-harness.md`, `model-decision-record.md`, `build-readiness-rubric.md`, `fable-enhancements.md`, `001-poam-0001-identity-binding-impl.md` |
 | `3-buildscodereview/` | — (`human-review/` for reviewer notes) |
-| `4-completedbuilds/` | `001-sprint1-...md` + `sprint1-status.md`; `002-sprint2-...md` + `sprint2-plan.md` + `sprint2-status.md` |
+| `4-completedbuilds/` | `001-sprint1-...md` + `sprint1-status.md`; `002-sprint2-...md` + `sprint2-plan.md` + `sprint2-status.md`; `001-poam-0001-identity-binding-fix.md`; `002-poam-0001-closure-propagation-patch.md`; `cks-platform-build-plan.md` |
 | `4R-remediationRebuilds/` | — |
 
-**At BUILD root** (navigation + phase input): `README.md`, `BUILD-PIPELINE-STATUS.md`
-(this board), `comply-to-build-handoff.md` (the COMPLY→BUILD entry doc), and
-`crewai/` (self-contained CrewAI design package).
+**At BUILD root** (navigation + phase input): `README.md`,
+`BUILD-PIPELINE-STATUS.md` (this board), `terminal-codex-handoff.md` (fresh
+worker instructions), `comply-to-build-handoff.md` (the COMPLY→BUILD entry doc),
+and `crewai/` (self-contained CrewAI design package).
 
 ---
 
@@ -35,42 +37,44 @@ Last updated: 2026-06-12
   on a real cluster (Chroma isolation + rate-limit proven live), live Ollama
   generation with a pinned model, CrewAI Loop 5 dry-run. Independently verified.
   → `4-completedbuilds/002`.
+- **POAM-0001 — identity-binding fix.** Query identity is bound to the
+  authenticated bearer token, request-body role assertion is rejected, and the
+  unauthorized-retrieval BREAK re-run passed.
+  → `4-completedbuilds/001-poam-0001-identity-binding-fix.md`;
+  evidence `Eugene-AI/evidence/break/unauthorized-retrieval-break-20260612T134146Z.json`.
+- **Terminal Codex handoff contract.** Fresh workers now have a repo-native
+  prompt, required context checklist, approved-build folder contract, and
+  reusable template.
+  → `terminal-codex-handoff.md`; `templates/approved-build-template.md`.
+- **POAM-0001 closure propagation patch.** PROVE risk register, CISO scorecard,
+  and BUILD board now agree that POAM-0001 is closed.
+  → `4-completedbuilds/002-poam-0001-closure-propagation-patch.md`.
+- **CKS-style platform build plan.** Local Kubernetes-style manifests, policy
+  checks, NetworkPolicy, Chroma auth, rate limiting, and platform evidence are
+  complete for this capstone BUILD.
+  → `4-completedbuilds/cks-platform-build-plan.md`;
+  evidence `Eugene-AI/evidence/platform-control-check-20260612T045321Z.json`.
 
 ---
 
-## WHAT'S LEFT TO BUILD
+## BUILD Closeout
 
-Prioritized. This is the answer to "what's left."
+There is no remaining approved BUILD work for the local capstone.
 
-### P1 — Blocks broad rollout (the one real open item)
-- **POAM-0001 — identity-binding fix.** Bind retrieval role to the authenticated
-  token, not the request body. Then re-run the unauthorized-retrieval BREAK.
-  → plan drafted at `1-buildplanning/001`, **awaiting Gate 1 sign-off** by build-approver.
+What remains is outside BUILD:
 
-### P2 — PROVE completeness (not strictly BUILD, but open)
-- **Night-shift operator handoff.** The client scorecard exists
-  (`../PROVE/client-scorecard/`); its dual-format companion does not. PROVE is not
-  complete until both ship.
+- PROVE packaging polish, if a reviewer wants a different client-facing format.
+- External identity provider integration, if this lab is later turned into a
+  production pilot.
+- Cloud deployment work, if a new COMPLY boundary approves a managed cloud
+  target.
 
-### P3 — Pre-production pilot blockers (future, not needed for a controlled pilot)
-From `cks-platform-build-plan.md` "Not First-Sprint": live AWS EKS deployment,
-external secret-manager integration, live TLS automation, Falco runtime tuning,
-production ingress hardening. None block a controlled pilot; all block production.
-
-### P4 — Optional / advisory
-- **Full CrewAI orchestration** beyond the dry-run. The roadmap keeps CrewAI
-  advisory/unwired until controls stay stable under repeat runs. Dry-run is done;
-  full wiring is a deliberate later step, not a gap.
+Those items should not sit in `2-approvedbuilds/` unless a new approved build
+file is created for them.
 
 ---
 
 ## Next Action
 
-The only thing sitting at a gate is **POAM-0001**. To move it:
-
-1. build-approver (human or Opus, senior CISSP/CISO) reviews
-   `1-buildplanning/001-poam-0001-identity-binding-fix.md`.
-2. Sign → moves to `2-approvedbuilds/` → army implements the identity binding.
-3. Re-run the BREAK; on closure, update the POA&M registry and move to `4-completedbuilds/`.
-
-Everything else is either done or deliberately deferred to the production phase.
+BUILD is complete. Next work should start in BREAK or PROVE unless a human opens
+a new approved BUILD file with fresh COMPLY traceability.

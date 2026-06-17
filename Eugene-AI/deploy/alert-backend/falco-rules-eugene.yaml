@@ -1,0 +1,26 @@
+- rule: Unexpected Connection to Chroma
+  desc: Detect non-Eugene-API workloads attempting to connect to the ChromaDB service port.
+  condition: >
+    evt.type=connect and fd.rport=8001 and
+    k8s.ns.name=eugene-ai
+  output: >
+    Unexpected connection to Chroma service
+    (scenario=6 rule=Unexpected Connection to Chroma
+    pod=%k8s.pod.name ns=%k8s.ns.name
+    src=%fd.sip dst=%fd.rip dport=%fd.rport proc=%proc.name)
+  priority: WARNING
+  tags: [eugene, break, scenario_6, chroma, network]
+
+- rule: Cross-Namespace Access to Eugene
+  desc: Secondary signal for unexpected namespace access into Eugene services.
+  condition: >
+    evt.type=connect and evt.dir=< and
+    k8s.ns.name!=eugene-ai and
+    (fd.sport=8000 or fd.sport=8001)
+  output: >
+    Cross-namespace access toward Eugene service
+    (scenario=4 rule=Cross-Namespace Access to Eugene
+    pod=%k8s.pod.name ns=%k8s.ns.name
+    src=%fd.sip dst=%fd.rip dport=%fd.rport proc=%proc.name)
+  priority: WARNING
+  tags: [eugene, break, scenario_4, network]

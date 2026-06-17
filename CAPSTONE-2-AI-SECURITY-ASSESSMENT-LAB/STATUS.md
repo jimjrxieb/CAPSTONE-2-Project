@@ -2,7 +2,10 @@
 
 ## Current Position
 
-Capstone 2 is now in BUILD Sprint 2 for Eugene, a local RAG assistant for the fictional MedData Nexus Health Systems environment. Sprint 1 evidence exists through Loop 4, including unauthorized retrieval and fable red-team failures that feed the current platform validation and remediation work.
+Capstone 2 BUILD is complete for Eugene, a local RAG assistant for the fictional
+MedData Nexus Health Systems environment. The Sprint 1 unauthorized-retrieval
+identity finding was remediated, re-tested, and closed; the local platform,
+generation, and CrewAI dry-run scope is packaged as completed BUILD work.
 
 The project has moved beyond scaffold. It includes a synthetic client corpus, architecture workpapers, CBBP lifecycle documentation, implemented Eugene API/chatbox paths, guardrail modules, tests, evidence runners, BREAK scenarios, framework mappings, and client-facing deliverables.
 
@@ -19,6 +22,7 @@ The project has moved beyond scaffold. It includes a synthetic client corpus, ar
 - Structured audit and review logging
 - Evidence runners for BUILD and BREAK validation
 - Dockerfile, Kubernetes manifests, NetworkPolicy, and policy checks
+- CKS-style local platform evidence
 - AI development assistant harness for Codex and Claude Code
 - Client findings report, executive summary, remediation roadmap, and AI adoption operating model
 
@@ -51,13 +55,13 @@ The strongest talking points are:
 - Human authority over risk decisions
 - Safe AI-assisted development with Codex and Claude Code under a documented harness
 
-## Remaining Phase-2 Work
+## Future Work Outside BUILD
 
-- Complete BUILD Sprint 2: RBAC role files, deployed-cluster live validation for Chroma direct-access rejection and rapid-query limiting, live Ollama generation evidence, CrewAI dry-run after the T3 gate, and PROVE packaging polish
-- Add external identity provider integration instead of static tokens after Sprint 2 evidence is packaged
+- Add external identity provider integration instead of static lab tokens if this lab becomes a production pilot
 - Add remote GitHub CI run history after publishing
 - Expand n8n intake/evidence workflow
 - Add cloud AI service extension workpapers for Bedrock/SageMaker as a separate COMPLY boundary
+- Polish PROVE packaging if a reviewer wants a different client-facing format
 
 ## Daily Work Path
 

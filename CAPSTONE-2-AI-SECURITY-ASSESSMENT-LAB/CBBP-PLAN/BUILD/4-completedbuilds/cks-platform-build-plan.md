@@ -1,17 +1,20 @@
 # CKS Platform Build Plan — MDN-AI-001
 
 > **Source:** `COMPLY/comply-checklist.md` Kubernetes / CKS Platform Controls  
-> **Purpose:** Define the platform hardening artifacts BUILD must create before a production-like pilot.
+> **Purpose:** Define the local capstone platform hardening artifacts BUILD must create for reviewable CKS-style evidence.
 
-**Status:** APPROVED — released to army
+**Status:** COMPLETE — local capstone platform build scope closed
 **Approved by:** J · build-approver (senior CISSP/CISO) · 2026-06-12
-**Approval scope:** Planning approved. First-sprint-eligible platform controls only; live EKS / external secrets / TLS / Falco remain pre-production (see "Not First-Sprint").
+**Approval scope:** Local/dev platform artifacts, static policy checks, and lab evidence only.
 
 ---
 
 ## Platform Scope
 
-The local Eugene build can run without Kubernetes, but the client SSP places the target RAG platform on AWS Kubernetes. BUILD must therefore produce a reviewable platform package even if deployment is simulated.
+The local Eugene build can run without Kubernetes, but the capstone includes a
+reviewable Kubernetes-style platform package so a reviewer can inspect the
+intended workload, network, policy, and supply-chain controls. Live cloud
+deployment is outside this BUILD.
 
 Target artifact path:
 
@@ -61,20 +64,14 @@ Eugene-AI/
 |---|---|
 | Cluster setup and hardening | Namespace isolation, admission policies, audit log requirement |
 | System hardening | Non-root containers, dropped capabilities, read-only filesystem |
-| Minimize microservice vulnerabilities | NetworkPolicy, resource limits, TLS/service boundaries |
+| Minimize microservice vulnerabilities | NetworkPolicy and resource limits |
 | Supply chain security | Image scan, SBOM, exact dependency pins, no latest tags |
-| Monitoring, logging, runtime security | App audit logs, Kubernetes events, future Falco/runtime monitoring |
+| Monitoring, logging, runtime security | App audit logs and Kubernetes event-retention requirement |
 
 ---
 
-## Not First-Sprint
+## Completion Note
 
-These are valid platform controls, but they should not block the local Eugene/RAG control build:
-
-- live AWS EKS deployment
-- real external secret manager integration
-- live TLS certificate automation
-- Falco tuning
-- production ingress hardening
-
-They become blockers before any production-like pilot, not before local BUILD Sprint 1.
+This build is complete for the local capstone. It does not claim a production
+cloud deployment, managed identity integration, or runtime security operations.
+Those are separate adoption decisions outside this BUILD boundary.

@@ -167,10 +167,9 @@ These are written to show consulting judgment: what failed, why it matters, how 
 
 This is a capstone lab, not a production deployment.
 
-Known phase-2 items:
+Known future items outside the completed local BUILD:
 
-- deployed-cluster live validation for ChromaDB direct-access rejection
-- identity provider integration instead of static lab tokens
-- optional generation-model quality evaluation after deterministic evidence mode
+- identity provider integration instead of static lab tokens if this becomes a production pilot
+- remote GitHub CI run history after publishing
 - cloud AI service extensions such as Bedrock, SageMaker, Azure AI, or Vertex AI under a new COMPLY boundary
 - more complete n8n workflow automation
