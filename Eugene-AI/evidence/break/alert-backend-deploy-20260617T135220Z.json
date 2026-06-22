@@ -1,0 +1,110 @@
+{
+  "run_id": "20260617T135220Z",
+  "task": "Sprint A A-T1",
+  "role": "deploy-agent",
+  "overall_status": "BLOCKED",
+  "blocker": "Loki accepted Falcosidekick POSTs and exposes the Unexpected Connection to Chroma rule label, but Loki query_range and series queries returned zero stream entries for Falco events. A-T1 cannot be marked DONE because the smoke alert was not retrievable from Loki/Grafana.",
+  "scope": {
+    "cluster": "kind/eugene-break",
+    "namespace": "eugene-ai",
+    "local_lab_only": true,
+    "attacks_run": false,
+    "git_operations": false,
+    "environment_left_running": true
+  },
+  "manifests_created": [
+    "Eugene-AI/deploy/alert-backend/falco-values.yaml",
+    "Eugene-AI/deploy/alert-backend/falco-rules-eugene.yaml",
+    "Eugene-AI/deploy/alert-backend/loki-values.yaml",
+    "Eugene-AI/deploy/alert-backend/grafana-datasource.yaml",
+    "Eugene-AI/deploy/alert-backend/promtail-audit.yaml",
+    "Eugene-AI/deploy/alert-backend/smoke-probe.yaml"
+  ],
+  "helm_releases": [
+    {
+      "name": "falco",
+      "namespace": "falco",
+      "status": "deployed",
+      "chart": "falco-9.1.0",
+      "app_version": "0.44.1",
+      "driver": "modern_ebpf",
+      "falcosidekick": "enabled"
+    },
+    {
+      "name": "loki",
+      "namespace": "siem",
+      "status": "deployed",
+      "chart": "loki-7.0.0",
+      "app_version": "3.6.7"
+    },
+    {
+      "name": "grafana",
+      "namespace": "siem",
+      "status": "deployed",
+      "chart": "grafana-10.5.15",
+      "app_version": "12.3.1"
+    }
+  ],
+  "runtime_state": {
+    "eugene_pods": [
+      "chromadb-7d4f974488-7gxvp 1/1 Running",
+      "eugene-api-5bbc544bbc-5gvbc 1/1 Running"
+    ],
+    "network_policies": [
+      "chromadb-allow-api-only",
+      "eugene-api-allow-required",
+      "eugene-api-default-deny"
+    ],
+    "falco_pods": [
+      "falco-46692 2/2 Running",
+      "falco-falcosidekick-78cb55d8f6-cm6pb 1/1 Running",
+      "falco-falcosidekick-78cb55d8f6-m9pvs 1/1 Running"
+    ],
+    "siem_pods": [
+      "eugene-audit-promtail-784db9899f-2pn9v 1/1 Running",
+      "grafana-7f59d967f-jvhz8 1/1 Running",
+      "loki-0 2/2 Running"
+    ],
+    "eugene_audit_log_exists": true,
+    "platform_policies": "Kyverno/OPA CRDs were not present; policies validated statically only."
+  },
+  "smoke_test": {
+    "probe_manifest": "Eugene-AI/deploy/alert-backend/smoke-probe.yaml",
+    "probe_target": "http://10.96.17.163:8001/api/v1/heartbeat",
+    "probe_result": "curl: (28) Failed to connect to 10.96.17.163 port 8001 after 3000 ms: Timeout was reached",
+    "network_policy_blocked": true,
+    "falco_rule": "Unexpected Connection to Chroma",
+    "falco_alert_jsonl": "Eugene-AI/evidence/break/falco-alerts-20260617T135220Z.jsonl",
+    "falco_alert_fired": true,
+    "falcosidekick_loki_post_ok": true,
+    "loki_rule_label_present": true,
+    "loki_alert_query_returned_entries": false,
+    "grafana_alert_visible": false,
+    "probe_deleted_after_test": true
+  },
+  "loki_verification": {
+    "label_values_query": "curl -s http://127.0.0.1:3100/loki/api/v1/label/rule/values",
+    "label_values_result_contains": [
+      "Contact K8S API Server From Container",
+      "Drop and execute new binary in container",
+      "Unexpected Connection to Chroma"
+    ],
+    "query_range_exact_rule": "{rule=\"Unexpected Connection to Chroma\"}",
+    "query_range_message_filter": "{rule=~\".+\"} |= \"Unexpected connection to Chroma\"",
+    "query_range_result": "success with empty result arrays",
+    "series_query_result": "success with empty data array",
+    "loki_logs_observation": "Loki query metrics showed total_entries=0 for the Chroma rule across the smoke-test window.",
+    "falcosidekick_logs_observation": "Falcosidekick logs reported Loki - POST OK (204) after smoke events."
+  },
+  "acceptance": {
+    "helm_releases_present": true,
+    "falco_and_sidekick_running": true,
+    "loki_grafana_promtail_running": true,
+    "eugene_audit_writing": true,
+    "networkpolicy_block_confirmed": true,
+    "falco_jsonl_alert_confirmed": true,
+    "loki_alert_confirmed": false,
+    "passed": false
+  },
+  "next_action": "Debug Falcosidekick-to-Loki stream storage/query behavior, then re-run the benign smoke test. Do not start A-T2..A-T7 until A-T1 passes or J explicitly accepts degraded control-held-only evidence."
+}

@@ -47,15 +47,22 @@ Out of scope:
 
 ## What I Built
 
-### Eugene Target System
+This lab is intentionally both sides of the AI security role:
+
+- **AI for security:** Eugene helps an assessor analyze a scoped corpus, draft advisory answers, run repeatable checks, and package evidence for human review.
+- **Security for AI:** the same system is treated as the target. Its RAG pipeline, data boundary, model use, guardrails, audit logs, and AI-assisted development workflow are built and tested like an AI system that could fail.
+
+### AI For Security — Eugene Assessment Assistant
 
 - FastAPI service with `/query`, `/ingest`, `/evidence/*`, and `/health` routes
 - Gradio chatbox with role selection, source citations, high-risk warning, and no upload/history surface
 - ChromaDB retrieval path with local embedding function and role-based post-retrieval filtering
 - Deterministic advisory draft path for repeatable evidence tests
 - Local model boundary documented for `llama3.2:3b` via Ollama
+- Eugene helpfulness evaluation over scoped business-use questions
+- Structured evidence runners that turn assessment checks into repeatable artifacts
 
-### Guardrails
+### Security For AI — RAG And Model Guardrails
 
 - Manifest-gated corpus ingestion
 - Prompt-injection scanner before query handling and before document embedding
@@ -69,7 +76,7 @@ Out of scope:
 - GitHub Actions for dependency audit and AI-assisted PR labeling
 - CODEOWNERS coverage for security-sensitive areas
 
-### Evidence Harnesses
+### Security Validation — BREAK And PROVE Harnesses
 
 - Sprint 1 control check for sanitizer, access control, output filter, ingest dry run, unsafe-document rejection, and audit logging
 - Chatbox BUILD and BREAK checks
@@ -78,7 +85,6 @@ Out of scope:
 - Unauthorized retrieval BREAK tests
 - HITL review bypass BREAK tests
 - Platform control evidence for model pins, dependency pins, Chroma auth, NetworkPolicy, and rate limiting
-- Eugene helpfulness evaluation over business-use questions
 
 ## Certification Alignment — CompTIA SecAI+ (CY0-001)
 
